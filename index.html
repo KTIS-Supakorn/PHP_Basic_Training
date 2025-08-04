@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>หลักสูตรอบรม PHP พื้นฐาน (13-15 สิงหาคม 2568) - เนื้อหาโดยละเอียด</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: "TH Sarabun New", sans-serif;
+      line-height: 1.7;
+      background: #f9f9f9;
+      color: #222;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: #004080;
+    }
+
+    h1 {
+      border-bottom: 3px solid #004080;
+      padding-bottom: 8px;
+    }
+
+    h2 {
+      margin-top: 30px;
+    }
+
+    h3 {
+      color: #0066cc;
+      margin-top: 20px;
+    }
+
+    h4 {
+      margin-top: 15px;
+    }
+
+    code {
+      background: #eaeaea;
+      padding: 3px 7px;
+      border-radius: 3px;
+      font-family: Consolas, monospace;
+    }
+
+    pre {
+      background: #eaeaea;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 6px;
+      margin: 10px 0 20px 0;
+      font-size: 14px;
+    }
+
+    /* Fixed Sidebar Styles */
+    .sidebar {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #004080, #0066cc);
+      color: white;
+      padding: 20px;
+      position: sticky;
+      top: 0;
+      overflow-y: auto;
+      max-height: 100vh;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 15px;
+      display: block;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateX(5px);
+    }
+
+    .sidebar a.active {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-left: 4px solid #ffc107;
+    }
+
+    .main-content {
+      padding: 30px;
+    }
+
+    .time {
+      color: #cc6600;
+      font-weight: bold;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .note {
+      background: linear-gradient(135deg, #ffffcc, #fff5b3);
+      padding: 15px;
+      border-left: 6px solid #cc6600;
+      border-radius: 8px;
+      margin: 15px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .section {
+      margin-bottom: 50px;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .example-title {
+      font-weight: 600;
+      margin-top: 15px;
+      margin-bottom: 8px;
+      color: #003366;
+      background: #e6f3ff;
+      padding: 8px 12px;
+      border-radius: 5px;
+      border-left: 4px solid #0066cc;
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, #004080, #0066cc);
+      color: white;
+    }
+
+    .list-group-item {
+      border-left: 4px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .list-group-item:hover {
+      border-left-color: #0066cc;
+      background-color: #f8f9fa;
+    }
+
+    .benefits-list {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      border: 2px solid #e9ecef;
+    }
+
+    .benefits-list li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-check {
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .scroll-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #004080;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
+
+    .scroll-to-top.show {
+      opacity: 1;
+    }
+
+    .card {
+      transition: all 0.3s ease;
+    }
+
+    pre:hover {
+      background-color: #e2e6ea !important;
+    }
+
+    .example-title {
+      position: relative;
+    }
+
+    .example-title::before {
+      content: '💡';
+      margin-right: 8px;
+    }
+
+    .time::before {
+      content: '⏰';
+      margin-right: 8px;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1100;
+      background: #004080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 767.98px) {
+      .mobile-menu-toggle {
+        display: block;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 280px;
+        height: 100vh;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1050;
+      }
+
+      .sidebar.show {
+        transform: translateX(0);
+      }
+
+      .main-content {
+        padding: 60px 15px 30px 15px;
+        width: 100%;
+      }
+
+      .card {
+        margin-bottom: 15px;
+      }
+
+      pre {
+        font-size: 12px;
+        padding: 10px;
+      }
+
+      /* Overlay for mobile menu */
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+      }
+
+      .sidebar-overlay.show {
+        display: block;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .main-content {
+        margin-left: 0;
+      }
+    }
+
+    /* Custom animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Print styles */
+    @media print {
+      .sidebar,
+      .scroll-to-top,
+      .mobile-menu-toggle {
+        display: none !important;
+      }
+
+      .main-content {
+        margin-left: 0 !important;
+        padding: 0 !important;
+      }
+
+      .section {
+        page-break-inside: avoid;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Mobile Menu Toggle -->
+  <button class="mobile-menu-toggle" id="mobileMenuToggle">
+    <i class="bi bi-list"></i> เมนู
+  </button>
+
+  <!-- Sidebar Overlay for Mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar Navigation -->
+      <nav class="col-md-3 col-lg-2 sidebar" id="sidebar">
+        <div class="text-left mb-4">
+          <img src="https://farm.ktisgroup.com/farmer/login/logo.png" width="200">
+          <hr style="border-color: rgba(255, 255, 255, 0.935);">
+        </div>
+        <a href="#intro"><i class="bi bi-info-circle"></i> แนะนำหลักสูตร</a>
+        <a href="#schedule"><i class="bi bi-calendar-event"></i> ตารางเรียน</a>
+        <a href="#day1"><i class="bi bi-calendar-day"></i> วันที่ 1</a>
+        <a href="#day2"><i class="bi bi-calendar2-check"></i> วันที่ 2</a>
+        <a href="#day3"><i class="bi bi-calendar2-plus"></i> วันที่ 3</a>
+        <a href="#materials"><i class="bi bi-box"></i> สิ่งที่ได้รับ</a>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="col-md-9 col-lg-10 main-content">
+        <section id="intro" class="section">
+          <h1><i class="bi bi-code-slash"></i> หลักสูตรอบรม PHP พื้นฐาน (13–15 สิงหาคม 2568)</h1>
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h5><i class="bi bi-calendar3"></i> ข้อมูลการอบรม</h5>
+                </div>
+                <div class="card-body">
+                  <p><strong>วันที่อบรม:</strong> 13–15 สิงหาคม 2568</p>
+                  <p><strong>เวลาเรียน:</strong> 09:00 – 17:00 (เว้นแต่วันสุดท้าย 4 ชม.)</p>
+                  <p><strong>สถานที่:</strong> ห้องอบรมคอมพิวเตอร์ / ออนไลน์ผ่าน Zoom</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h5><i class="bi bi-target"></i> วัตถุประสงค์</h5>
+                </div>
+                <div class="card-body">
+                  <ul class="list-unstyled">
+                    <li><i class="bi bi-check-circle text-success"></i> เข้าใจหลักการเขียนโปรแกรม</li>
+                    <li><i class="bi bi-check-circle text-success"></i> สามารถใช้ PHP พื้นฐานได้</li>
+                    <li><i class="bi bi-check-circle text-success"></i> สร้างระบบ CRUD ได้</li>
+                    <li><i class="bi bi-check-circle text-success"></i> เชื่อมต่อฐานข้อมูล MySQL</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="schedule" class="section">
+          <h2><i class="bi bi-calendar-event"></i> ตารางอบรมและหัวข้อ (3 วัน)</h2>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-header text-center">
+                  <h5>วันที่ 1</h5>
+                  <small>13 สิงหาคม 2568</small>
+                </div>
+                <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">แนะนำการเขียนโปรแกรม</li>
+                    <li class="list-group-item">PHP Syntax พื้นฐาน</li>
+                    <li class="list-group-item">ฟังก์ชัน (Function)</li>
+                    <li class="list-group-item">ฟอร์ม HTML + PHP</li>
+                    <li class="list-group-item">ChatGPT ช่วยเขียนโปรแกรม</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-header text-center">
+                  <h5>วันที่ 2</h5>
+                  <small>14 สิงหาคม 2568</small>
+                </div>
+                <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ติดตั้ง VSCode + Extension</li>
+                    <li class="list-group-item">เชื่อมต่อ MySQL ด้วย PHP</li>
+                    <li class="list-group-item">ระบบ CRUD พื้นฐาน</li>
+                    <li class="list-group-item">เสริมความปลอดภัย</li>
+                    <li class="list-group-item">Backend/Frontend Structure</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-header text-center">
+                  <h5>วันที่ 3</h5>
+                  <small>15 สิงหาคม 2568</small>
+                </div>
+                <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Workshop: Mini Project</li>
+                    <li class="list-group-item">การอัปโหลดไฟล์</li>
+                    <li class="list-group-item">สรุปและแนะแนวต่อยอด</li>
+                    <li class="list-group-item">REST API เบื้องต้น</li>
+                    <li class="list-group-item">Q&A และปรึกษาโปรเจกต์</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="day1" class="section">
+          <h2><i class="bi bi-calendar-day"></i> วันที่ 1: 13 สิงหาคม 2568</h2>
+
+          <h3 class="time"><i class="bi bi-clock"></i> 09:30 – 10:30</h3>
+          <h4><i class="bi bi-lightbulb"></i> แนะนำการเขียนโปรแกรมเบื้องต้น</h4>
+          <ul>
+            <li><strong>แนวคิดโปรแกรมคืออะไร?</strong><br>
+              โปรแกรมคือชุดคำสั่งที่เขียนขึ้นเพื่อสั่งให้คอมพิวเตอร์ทำงานตามที่เราต้องการ<br>
+              เป็นการแก้ปัญหาหรือทำงานแทนมนุษย์อย่างมีประสิทธิภาพและรวดเร็ว<br>
+              การเขียนโปรแกรมเหมือนการบอกขั้นตอนหรือสูตรให้เครื่องทำตามอย่างแม่นยำ<br>
+              <em>ประโยชน์:</em> ลดข้อผิดพลาด, ทำงานซ้ำ ๆ อัตโนมัติ, สร้างแอปพลิเคชันต่าง ๆ<br>
+              <br>
+              <strong>คำถามสำคัญก่อนเขียนโปรแกรม:</strong><br>
+              - งานที่ต้องทำคืออะไร?<br>
+              - ข้อมูลที่จะใช้และผลลัพธ์ที่ต้องการ?<br>
+              - ขั้นตอนการทำงาน (Logic) อย่างไร?
+            </li>
+
+            <li><strong>Input / Process / Output (IPO Model)</strong><br>
+              <ul>
+                <li><strong>Input (ข้อมูลนำเข้า):</strong> ข้อมูลหรือคำสั่งที่โปรแกรมรับเข้ามา เช่น ข้อมูลผู้ใช้, ไฟล์,
+                  เซนเซอร์</li>
+                <li><strong>Process (การประมวลผล):</strong> ขั้นตอนการทำงานกับข้อมูล เช่น การคำนวณ, การตัดสินใจ,
+                  การจัดการข้อมูล</li>
+                <li><strong>Output (ผลลัพธ์):</strong> ผลที่ได้จากการประมวลผล เช่น แสดงข้อความ, บันทึกไฟล์, ส่งข้อมูลออก
+                </li>
+              </ul>
+              <div class="example-title">ตัวอย่างง่าย ๆ</div>
+              <pre>
+// รับค่าจำนวนเต็มจากผู้ใช้ (Input)
+จำนวน1 = 10
+จำนวน2 = 20
+
+// ประมวลผลผลบวก (Process)
+ผลรวม = จำนวน1 + จำนวน2
+
+// แสดงผล (Output)
+print("ผลรวมคือ", ผลรวม)
+            </pre>
+            </li>
+
+            <li><strong>ตัวแปร (Variable), ค่าคงที่ (Constant), ประเภทข้อมูล (Data Types)</strong><br>
+              <ul>
+                <li><strong>ตัวแปร:</strong> เป็นชื่อแทนที่เก็บข้อมูลที่เปลี่ยนแปลงได้ เช่น ตัวแปรเก็บชื่อ, อายุ</li>
+                <li><strong>ค่าคงที่:</strong> ข้อมูลที่ไม่เปลี่ยนแปลง เช่น ค่า PI = 3.14159</li>
+                <li><strong>ประเภทข้อมูลพื้นฐาน:</strong>
+                  <ul>
+                    <li>จำนวนเต็ม (Integer): 1, -100, 0</li>
+                    <li>ทศนิยม (Float): 3.14, -0.001</li>
+                    <li>ข้อความ (String): "สวัสดี", 'Hello'</li>
+                    <li>บูลีน (Boolean): true, false</li>
+                    <li>อาร์เรย์ (Array): ชุดข้อมูล เช่น [1, 2, 3]</li>
+                  </ul>
+                </li>
+              </ul>
+              <div class="example-title">ตัวอย่างการประกาศตัวแปรและค่าคงที่ใน PHP</div>
+              <pre>
+$age = 25;                // ตัวแปรเก็บอายุ
+$name = "KORN";           // ตัวแปรเก็บชื่อ
+define("PI", 3.14159);    // ค่าคงที่
+$isActive = true;         // ตัวแปร boolean
+            </pre>
+            </li>
+          </ul>
+
+          <h3 class="time"><i class="bi bi-clock"></i> 10:30 – 12:00</h3>
+          <h4><i class="bi bi-code"></i> PHP Syntax พื้นฐาน</h4>
+          <ul>
+            <li><strong>การแสดงผลข้อความด้วย echo และ print</strong><br>
+              - <code>echo</code> ใช้แสดงข้อความหรือค่าตัวแปรหลายตัวพร้อมกันได้<br>
+              - <code>print</code> แสดงข้อความทีละค่า และคืนค่ากลับ 1 (ใช้ในเงื่อนไขได้)<br>
+              <div class="example-title">ตัวอย่าง</div>
+              <pre>
+echo "สวัสดี ", $name, "!";   // แสดงข้อความและตัวแปร
+print "ยินดีต้อนรับ!";        // แสดงข้อความอย่างเดียว
+            </pre>
+            </li>
+
+            <li><strong>ตัวแปรใน PHP</strong><br>
+              - ตัวแปรขึ้นต้นด้วยเครื่องหมาย <code>$</code> เช่น <code>$username</code>, <code>$count</code><br>
+              - PHP เป็นภาษาที่ไม่ต้องกำหนดประเภทตัวแปรล่วงหน้า (Dynamic Typing)<br>
+              - ประเภทข้อมูลจะถูกกำหนดอัตโนมัติตามค่าที่กำหนด<br>
+              <div class="example-title">ตัวอย่าง</div>
+              <pre>
+$price = 100;        // Integer
+$product = "iPhone"; // String
+$active = true;      // Boolean
+            </pre>
+            </li>
+
+            <li><strong>คำสั่งเงื่อนไข (if-else, switch)</strong><br>
+              - ใช้สำหรับตัดสินใจตามเงื่อนไขต่าง ๆ<br>
+              - <code>if-else</code> ใช้ตรวจสอบเงื่อนไขแบบง่าย<br>
+              - <code>switch</code> ใช้ตรวจสอบค่าที่มีหลายกรณี<br>
+              <div class="example-title">if-else ตัวอย่าง</div>
+              <pre>
+$age = 20;
+if ($age >= 18) {
+  echo "คุณเป็นผู้ใหญ่";
+} else {
+  echo "คุณยังไม่บรรลุนิติภาวะ";
+}
+            </pre>
+              <div class="example-title">switch ตัวอย่าง</div>
+              <pre>
+$day = "Monday";
+switch ($day) {
+  case "Monday":
+    echo "วันนี้วันจันทร์";
+    break;
+  case "Tuesday":
+    echo "วันนี้วันอังคาร";
+    break;
+  default:
+    echo "วันนี้ไม่ใช่วันจันทร์หรืออังคาร";
+}
+            </pre>
+            </li>
+
+            <li><strong>ลูป (for, while, foreach)</strong><br>
+              - ใช้ทำซ้ำคำสั่งหลายรอบ<br>
+              - <code>for</code> ใช้เมื่อรู้จำนวนรอบ<br>
+              - <code>while</code> ทำซ้ำตามเงื่อนไข<br>
+              - <code>foreach</code> ใช้กับอาร์เรย์<br>
+              <div class="example-title">for ตัวอย่าง</div>
+              <pre>
+for ($i = 1; $i <= 5; $i++) {
+  echo "ลูปครั้งที่ $i\n";
+}
+            </pre>
+              <div class="example-title">while ตัวอย่าง</div>
+              <pre>
+$i = 1;
+while ($i <= 5) {
+  echo "ลูปครั้งที่ $i\n";
+  $i++;
+}
+            </pre>
+              <div class="example-title">foreach ตัวอย่าง</div>
+              <pre>
+$fruits = ["แอปเปิล", "กล้วย", "เชอร์รี่"];
+foreach ($fruits as $fruit) {
+  echo "ผลไม้: $fruit\n";
+}
+            </pre>
+            </li>
+          </ul>
+
+          <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> <strong>พักเที่ยง:</strong> 12:00 – 13:00
+          </div>
+
+          <h3 class="time"><i class="bi bi-clock"></i> 13:00 – 14:30</h3>
+          <h4><i class="bi bi-gear"></i> ฟังก์ชัน (Function)</h4>
+          <ul>
+            <li><strong>ฟังก์ชันคืออะไร?</strong><br>
+              เป็นกลุ่มคำสั่งที่เขียนรวมกันเพื่องานใดงานหนึ่ง โดยสามารถเรียกใช้ซ้ำได้<br>
+              ช่วยลดการเขียนโค้ดยาว ๆ ซ้ำหลายครั้ง<br>
+              <br>
+              <div class="example-title">สร้างฟังก์ชันและเรียกใช้</div>
+              <pre>
+function sayHello() {
+  echo "สวัสดีครับทุกคน!";
+}
+sayHello();  // เรียกใช้ฟังก์ชัน
+            </pre>
+            </li>
+
+            <li><strong>พารามิเตอร์และค่า return</strong><br>
+              - ฟังก์ชันสามารถรับข้อมูล (พารามิเตอร์) เพื่อใช้งานภายใน<br>
+              - ฟังก์ชันสามารถส่งค่ากลับ (return) หลังประมวลผล<br>
+              <div class="example-title">ตัวอย่าง</div>
+              <pre>
+function sum($a, $b) {
+  return $a + $b;
+}
+$result = sum(10, 15);
+echo "ผลรวมคือ $result";  // 25
+            </pre>
+            </li>
+
+            <li><strong>Workshop: ฟังก์ชันตรวจสอบเลขคู่-คี่</strong><br>
+              <pre>
+function isEven($num) {
+  if ($num % 2 == 0) {
+    return true;
+  }
+  return false;
+}
+
+$number = 7;
+if (isEven($number)) {
+  echo "$number เป็นเลขคู่";
+} else {
+  echo "$number เป็นเลขคี่";
+}
+            </pre>
+            </li>
+          </ul>
+
+          <h3 class="time"><i class="bi bi-clock"></i> 14:30 – 16:00</h3>
+          <h4><i class="bi bi-file-earmark-text"></i> ฟอร์ม HTML + รับค่าด้วย PHP</h4>
+          <ul>
+            <li><strong>การสร้างแบบฟอร์ม</strong><br>
+              - ใช้แท็ก <code>&lt;form&gt;</code> กำหนด action และ method<br>
+              - action คือไฟล์ PHP ที่จะรับข้อมูล<br>
+              - method มี 2 แบบ คือ GET (ส่งข้อมูลผ่าน URL) และ POST (ส่งข้อมูลแบบไม่แสดงใน URL)<br>
+              <div class="example-title">ตัวอย่างฟอร์ม</div>
+              <pre>
+&lt;form action="process.php" method="post"&gt;
+  ชื่อ: &lt;input type="text" name="username" required&gt;
+  &lt;input type="submit" value="ส่งข้อมูล"&gt;
+&lt;/form&gt;
+            </pre>
+            </li>
+
+            <li><strong>การรับค่าจากฟอร์ม</strong><br>
+              - ใช้ตัวแปรซุปเปอร์โกลบอล <code>$_GET</code> หรือ <code>$_POST</code><br>
+              - ต้องตรวจสอบว่าค่าถูกส่งมาหรือไม่<br>
+              <div class="example-title">ตัวอย่างรับค่า POST ใน process.php</div>
+              <pre>
+if (isset($_POST['username']) && $_POST['username'] != '') {
+  $username = htmlspecialchars($_POST['username']);
+  echo "สวัสดี, $username";
+} else {
+  echo "กรุณากรอกชื่อ";
+}
+            </pre>
+            </li>
+
+            <li><strong>การ Validate เบื้องต้น</strong><br>
+              - ตรวจสอบข้อมูลที่รับมา ว่าถูกต้องตามเงื่อนไขหรือไม่ เช่น ไม่เว้นว่าง, รูปแบบถูกต้อง<br>
+              - ใช้ฟังก์ชัน <code>htmlspecialchars()</code> ป้องกันการโจมตีด้วย XSS (Cross-site scripting)<br>
+              <div class="example-title">ตัวอย่างการ validate</div>
+              <pre>
+if (!empty($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+  $email = htmlspecialchars($_POST['email']);
+  echo "อีเมลที่กรอกคือ $email";
+} else {
+  echo "กรุณากรอกอีเมลให้ถูกต้อง";
+}
+            </pre>
+            </li>
+          </ul>
+
+          <h3 class="time"><i class="bi bi-clock"></i> 16:00 – 17:00</h3>
+          <h4><i class="bi bi-robot"></i> ChatGPT ช่วยเขียนโปรแกรม</h4>
+          <ul>
+            <li><strong>วิธีตั้ง Prompt</strong><br>
+              - ระบุภาษาที่ต้องการเขียน<br>
+              - บอกความต้องการอย่างชัดเจน เช่น "ช่วยเขียนฟังก์ชัน PHP สำหรับคำนวณผลรวม"</li>
+            <li><strong>ตัวอย่างให้ AI ช่วยเขียนโค้ดและตรวจสอบ</strong><br>
+              - ให้ ChatGPT ช่วยเขียนฟังก์ชัน<br>
+              - ขอคำอธิบายโค้ด<br>
+              - ตรวจสอบจุดบกพร่องและแก้ไข</li>
+            <li><strong>วิเคราะห์โค้ดจาก ChatGPT</strong><br>
+              - แกะโค้ดทีละบรรทัด<br>
+              - ทำความเข้าใจหลักการและวิธีทำงาน</li>
+          </ul>
+          <div class="note">
+            <i class="bi bi-lightbulb"></i> <strong>หมายเหตุ:</strong> มีตัวอย่างให้ทดลองจริง พร้อมคำแนะนำวิธีใช้
+            ChatGPT ให้เกิดประโยชน์สูงสุด
+          </div>
+        </section>
+
+        <section id="day2" class="section">
+          <h2><i class="bi bi-calendar2-check"></i> วันที่ 2: 14 สิงหาคม 2568</h2>
+
+          <h3 class="time"><i class="bi bi-clock"></i> 09:00 – 10:30</h3>
+          <h4><i class="bi bi-download"></i> ติดตั้ง VSCode + Extension ที่เหมาะกับ PHP</h4>
+          <ul>
+            <li><strong>ติดตั้ง VSCode:</strong><br>
+              ดาวน์โหลดจาก <a href="https://code.visualstudio.com/" target="_blank"
+                class="text-decoration-none">https://code.visualstudio.com/</a><br>
+              ติดตั้งง่ายและฟรี รองรับหลายระบบปฏิบัติการ</li>
+            <li><strong>Extension ที่แนะนำ</strong>
+              <div class="row mt-3">
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <i class="bi bi-puzzle text-primary" style="font-size: 2rem;"></i>
+                      <h6 class="mt-2">PHP Intelephense</h6>
+                      <small>ช่วยตรวจสอบโค้ด PHP, Auto Completion</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <i class="bi bi-server text-success" style="font-size: 2rem;"></i>
+                      <h6 class="mt-2">PHP Server</h6>
+                      <small>รัน PHP แบบ Local Server อย่างง่าย</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <i class="bi bi-brush text-warning" style="font-size: 2rem;"></i>
+                      <h6 class="mt-2">Prettier</h6>
+                      <small>จัดรูปแบบโค้ดให้สวยงาม</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li><strong>การรัน PHP บน localhost ด้วย XAMPP</strong><br>
+              - ติดตั้ง XAMPP เพื่อรัน Apache + MySQL บนเครื่อง<br>
+              - วางไฟล์ PHP ในโฟลเดอร์ <code>htdocs</code><br>
+              - เปิดเบราว์เซอร์ไปที่ <code>http://localhost/filename.php</code>
+            </li>
+          </ul>
+
+          <h3 class="time"><i class="bi bi-clock"></i> 10:30 – 12:00</h3>
+          <h4><i class="bi bi-database"></i> การเชื่อมต่อ MySQL ด้วย PHP (mysqli)</h4>
+          <ul>
+            <li><strong>สร้างฐานข้อมูล MySQL</strong><br>
+              - ใช้ phpMyAdmin หรือคำสั่ง SQL สร้างฐานข้อมูล<br>
+              <code>CREATE DATABASE testdb;</code>
+            </li>
+            <li><strong>เขียนโค้ดเชื่อมต่อฐานข้อมูล</strong><br>
+              <div class="example-title">ไฟล์ config/database.php</div>
+              <pre>
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "testdb";
+
+// สร้างการเชื่อมต่อ
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// ตรวจสอบการเชื่อมต่อ
+if ($conn->connect_error) {
+  die("เชื่อมต่อฐานข้อมูลล้มเหลว: " . $conn->connect_error);
+}
+echo "เชื่อมต่อฐานข้อมูลสำเร็จ";
+            </pre>
+            </li>
+            <li><strong>ดึงข้อมูลจากฐานข้อมูล (SELECT)</strong><br>
+              <div class="example-title">ตัวอย่างการดึงข้อมูล</div>
+              <pre>
+$sql = "SELECT id, name FROM employees";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+    echo "ID: " . $row["id"] . " ชื่อ: " . $row["name"] . "&lt;br&gt;";
+  }
+} else {
+  echo "ไม่มีข้อมูล";
+}
+            </pre>
+            </li>
+          </ul>
+
+          <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> <strong>พักเที่ยง:</strong> 12:00 – 13:00
+          </div>
+
+          <h3 class="time"><i class="bi bi-clock"></i> 13:00 – 14:30</h3>
+          <h4><i class="bi bi-arrow-repeat"></i> ระบบ CRUD พื้นฐาน (Create, Read, Update, Delete)</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h6><i class="bi bi-plus-circle text-success"></i> Create (เพิ่มข้อมูล)</h6>
+                </div>
+                <div class="card-body">
+                  <p>สร้างฟอร์มและเขียนโค้ดบันทึกข้อมูลลงฐานข้อมูล</p>
+                  <div class="example-title">ตัวอย่าง INSERT</div>
+                  <pre>
+$sql = "INSERT INTO employees (name, email) 
+        VALUES ('$name', '$email')";
+$conn->query($sql);
+                </pre>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h6><i class="bi bi-eye text-primary"></i> Read (อ่านข้อมูล)</h6>
+                </div>
+                <div class="card-body">
+                  <p>ดึงข้อมูลมาแสดงในตาราง HTML พร้อมจัดรูปแบบให้ดูง่าย</p>
+                  <div class="example-title">ตัวอย่าง SELECT</div>
+                  <pre>
+$sql = "SELECT * FROM employees";
+$result = $conn->query($sql);
+                </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h6><i class="bi bi-pencil text-warning"></i> Update (แก้ไขข้อมูล)</h6>
+                </div>
+                <div class="card-body">
+                  <p>เพิ่มปุ่มแก้ไขข้อมูล กดแล้วไปหน้าแก้ไข พร้อมดึงข้อมูลเดิมมาแสดง</p>
+                  <div class="example-title">ตัวอย่าง UPDATE</div>
+                  <pre>
+$sql = "UPDATE employees 
+        SET name='$name', email='$email' 
+        WHERE id=$id";
+                </pre>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h6><i class="bi bi-trash text-danger"></i> Delete (ลบข้อมูล)</h6>
+                </div>
+                <div class="card-body">
+                  <p>เพิ่มปุ่มลบข้อมูล พร้อมยืนยันก่อนลบจริง</p>
+                  <div class="example-title">ตัวอย่าง DELETE</div>
+                  <pre>
+$sql = "DELETE FROM employees 
+        WHERE id=$id";
+$conn->query($sql);
+                </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="note mt-3">
+            <i class="bi bi-tools"></i> <strong>Workshop:</strong> มีตัวอย่าง Workshop
+            พร้อมฐานข้อมูลตัวอย่างให้ฝึกปฏิบัติ
+          </div>
+
+          <h3 class="time"><i class="bi bi-clock"></i> 14:30 – 16:00</h3>
+          <h4><i class="bi bi-shield-check"></i> เสริมความปลอดภัยเบื้องต้น</h4>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-header bg-danger text-white">
+                  <h6><i class="bi bi-bug"></i> SQL Injection</h6>
+                </div>
+                <div class="card-body">
+                  <p>ใช้ฟังก์ชัน <code>mysqli_real_escape_string()</code> หรือ Prepared Statements</p>
+                  <div class="example-title">ตัวอย่าง</div>
+                  <pre>
+$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+                </pre>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-header bg-warning text-dark">
+                  <h6><i class="bi bi-shield"></i> XSS Protection</h6>
+                </div>
+                <div class="card-body">
+                  <p>ตรวจสอบและกรองข้อมูลก่อนนำไปใช้งาน</p>
+                  <div class="example-title">ตัวอย่าง</div>
+                  <pre>
+$clean_input = htmlspecialchars($_POST['input']);
+$clean_input = strip_tags($clean_input);
+                </pre>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                  <h6><i class="bi bi-key"></i> CSRF Token</h6>
+                </div>
+                <div class="card-body">
+                  <p>สร้างโทเคนสุ่มเพื่อป้องกันการส่งฟอร์มปลอมจากเว็บอื่น</p>
+                  <div class="example-title">ตัวอย่าง</div>
+                  <pre>
+$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+// ใส่ใน hidden input
+                </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="time"><i class="bi bi-clock"></i> 16:00 – 17:00</h3>
+          <h4><i class="bi bi-diagram-3"></i> แนวคิด Backend/Frontend + Project Structuring</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h6><i class="bi bi-server"></i> Backend vs Frontend</h6>
+                </div>
+                <div class="card-body">
+                  <ul>
+                    <li><strong>Backend:</strong> ส่วนที่ประมวลผลข้อมูล เช่น PHP, ฐานข้อมูล</li>
+                    <li><strong>Frontend:</strong> ส่วนที่ผู้ใช้เห็น เช่น HTML, CSS, JavaScript</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h6><i class="bi bi-folder"></i> โครงสร้างโฟลเดอร์โปรเจกต์</h6>
+                </div>
+                <div class="card-body">
+                  <ul class="list-unstyled">
+                    <li><code>config/</code> – เก็บไฟล์ตั้งค่าฐานข้อมูล</li>
+                    <li><code>views/</code> – เก็บไฟล์แสดงผล HTML</li>
+                    <li><code>controllers/</code> – จัดการตรรกะโปรแกรม</li>
+                    <li><code>models/</code> – สำหรับเก็บคลาสหรือฟังก์ชันจัดการข้อมูล</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="day3" class="section">
+          <h2><i class="bi bi-calendar2-plus"></i> วันที่ 3: 15 สิงหาคม 2568</h2>
+
+          <h3 class="time"><i class="bi bi-clock"></i> 09:00 – 10:30</h3>
+          <h4><i class="bi bi-tools"></i> Workshop: Mini Project จริง</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header bg-success text-white">
+                  <h6><i class="bi bi-people"></i> ระบบจัดการรายชื่อพนักงาน</h6>
+                </div>
+                <div class="card-body">
+                  <ul>
+                    <li>CRUD สมบูรณ์</li>
+                    <li>ระบบค้นหา (Search)</li>
+                    <li>การแบ่งหน้า (Pagination)</li>
+                    <li>การเรียงลำดับข้อมูล</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header bg-primary text-white">
+                  <h6><i class="bi bi-person-check"></i> ระบบ Login และ RBAC</h6>
+                </div>
+                <div class="card-body">
+                  <ul>
+                    <li>ระบบ Authentication</li>
+                    <li>Session Management</li>
+                    <li>Role-Based Access Control</li>
+                    <li>แบ่งสิทธิ์ Admin กับ User</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="time"><i class="bi bi-clock"></i> 10:30 – 11:30</h3>
+          <h4><i class="bi bi-cloud-upload"></i> การอัปโหลดรูปภาพและไฟล์แนบ</h4>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="card text-center">
+                <div class="card-body">
+                  <i class="bi bi-upload text-primary" style="font-size: 3rem;"></i>
+                  <h6 class="mt-2">อัปโหลดไฟล์</h6>
+                  <p><code>move_uploaded_file()</code></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card text-center">
+                <div class="card-body">
+                  <i class="bi bi-file-earmark-image text-success" style="font-size: 3rem;"></i>
+                  <h6 class="mt-2">ตรวจสอบชนิด</h6>
+                  <p>jpg, png, pdf</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card text-center">
+                <div class="card-body">
+                  <i class="bi bi-hdd text-warning" style="font-size: 3rem;"></i>
+                  <h6 class="mt-2">จำกัดขนาด</h6>
+                  <p>ไม่เกิน 2MB</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card text-center">
+                <div class="card-body">
+                  <i class="bi bi-file-earmark-text text-info" style="font-size: 3rem;"></i>
+                  <h6 class="mt-2">ตั้งชื่อใหม่</h6>
+                  <p>timestamp + สุ่ม</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="example-title mt-3">ตัวอย่างการอัปโหลดไฟล์</div>
+          <pre>
+if (isset($_FILES['upload_file'])) {
+  $target_dir = "uploads/";
+  $file_extension = pathinfo($_FILES["upload_file"]["name"], PATHINFO_EXTENSION);
+  $new_filename = time() . '_' . uniqid() . '.' . $file_extension;
+  $target_file = $target_dir . $new_filename;
+  
+  // ตรวจสอบขนาดไฟล์ (2MB = 2097152 bytes)
+  if ($_FILES["upload_file"]["size"] > 2097152) {
+    echo "ไฟล์ใหญ่เกินไป";
+  } else if (move_uploaded_file($_FILES["upload_file"]["tmp_name"], $target_file)) {
+    echo "อัปโหลดไฟล์สำเร็จ: " . $new_filename;
+  }
+}
+        </pre>
+
+          <h3 class="time"><i class="bi bi-clock"></i> 11:30 – 13:00</h3>
+          <h4><i class="bi bi-graph-up"></i> สรุปและแนะแนวต่อยอด</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h6><i class="bi bi-api"></i> REST API เบื้องต้น</h6>
+                </div>
+                <div class="card-body">
+                  <p>การสร้าง REST API เบื้องต้นด้วย PHP เพื่อให้บริการข้อมูล</p>
+                  <div class="example-title">ตัวอย่าง API Endpoint</div>
+                  <pre>
+// api/users.php
+header('Content-Type: application/json');
+$users = getUsersFromDatabase();
+echo json_encode($users);
+                </pre>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h6><i class="bi bi-question-circle"></i> Q&A และปรึกษา</h6>
+                </div>
+                <div class="card-body">
+                  <ul>
+                    <li>ตอบคำถามเกี่ยวกับเนื้อหา</li>
+                    <li>ปรึกษาโปรเจกต์ส่วนตัว</li>
+                    <li>แนวทางการพัฒนาต่อ</li>
+                    <li>แนะนำแหล่งเรียนรู้เพิ่มเติม</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-success mt-4">
+            <h5><i class="bi bi-lightbulb"></i> แนวทางการเรียนรู้ต่อ</h5>
+            <div class="row">
+              <div class="col-md-4">
+                <h6>Framework ยอดนิยม</h6>
+                <ul>
+                  <li>Laravel</li>
+                  <li>CodeIgniter</li>
+                  <li>Symfony</li>
+                </ul>
+              </div>
+              <div class="col-md-4">
+                <h6>เทคนิคขั้นสูง</h6>
+                <ul>
+                  <li>PHP OOP</li>
+                  <li>Design Patterns</li>
+                  <li>Composer & PSR</li>
+                </ul>
+              </div>
+              <div class="col-md-4">
+                <h6>เครื่องมือเสริม</h6>
+                <ul>
+                  <li>Git Version Control</li>
+                  <li>Docker</li>
+                  <li>PHPUnit Testing</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> <strong>พักเที่ยง:</strong> 12:00 – 13:00 (ตามปกติ)
+          </div>
+        </section>
+
+        <section id="materials" class="section">
+          <h2><i class="bi bi-box"></i> สิ่งที่ผู้เรียนจะได้รับ</h2>
+          <div class="benefits-list">
+            <ul class="list-unstyled">
+              <li><span class="icon-check">✔️</span> ไฟล์ source code ตัวอย่างทุกบทเรียน</li>
+              <li><span class="icon-check">✔️</span> แบบฝึกหัดท้ายบทเพื่อฝึกฝนทักษะ</li>
+              <li><span class="icon-check">✔️</span> เอกสารแนะนำ Extension และเครื่องมือที่จำเป็น</li>
+              <li><span class="icon-check">✔️</span> สไลด์และเอกสารแนวคิดการเขียนโปรแกรมอย่างมืออาชีพ</li>
+              <li><span class="icon-check">✔️</span> คำแนะนำวิธีใช้ ChatGPT เพื่อช่วยเขียนโค้ดและแก้ไขปัญหา</li>
+              <li><span class="icon-check">✔️</span> Template โปรเจกต์พร้อมใช้งาน</li>
+              <li><span class="icon-check">✔️</span> คู่มือ Best Practices สำหรับนักพัฒนา PHP</li>
+            </ul>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header bg-info text-white">
+                  <h6><i class="bi bi-person-workspace"></i> สำหรับผู้เริ่มต้น</h6>
+                </div>
+                <div class="card-body">
+                  <p>หลักสูตรนี้เหมาะสำหรับผู้ที่:</p>
+                  <ul>
+                    <li>ไม่เคยเขียนโปรแกรมมาก่อน</li>
+                    <li>ต้องการเรียนรู้ PHP เพื่อพัฒนาเว็บไซต์</li>
+                    <li>ต้องการสร้างระบบจัดการข้อมูลง่าย ๆ</li>
+                    <li>สนใจใช้ AI ช่วยเขียนโปรแกรม</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header bg-success text-white">
+                  <h6><i class="bi bi-trophy"></i> หลังจบหลักสูตร</h6>
+                </div>
+                <div class="card-body">
+                  <p>ผู้เรียนจะสามารถ:</p>
+                  <ul>
+                    <li>เขียนโปรแกรม PHP พื้นฐานได้</li>
+                    <li>สร้างเว็บไซต์แบบ Dynamic</li>
+                    <li>จัดการฐานข้อมูล MySQL</li>
+                    <li>พัฒนาระบบ CRUD สมบูรณ์</li>
+                    <li>ใช้ AI เป็นผู้ช่วยในการเขียนโค้ด</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Scroll to top button -->
+        <button class="scroll-to-top" id="scrollToTop">
+          <i class="bi bi-arrow-up"></i>
+        </button>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Mobile menu functionality
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    function toggleMobileMenu() {
+      sidebar.classList.toggle('show');
+      sidebarOverlay.classList.toggle('show');
+    }
+
+    function closeMobileMenu() {
+      sidebar.classList.remove('show');
+      sidebarOverlay.classList.remove('show');
+    }
+
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+    sidebarOverlay.addEventListener('click', closeMobileMenu);
+
+    // Close mobile menu when clicking on nav links
+    document.querySelectorAll('.sidebar a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        // Close mobile menu on mobile devices
+        if (window.innerWidth < 768) {
+          closeMobileMenu();
+        }
+        
+        // Smooth scrolling
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Show/hide scroll to top button
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollToTopBtn.classList.add('show');
+      } else {
+        scrollToTopBtn.classList.remove('show');
+      }
+    });
+
+    // Scroll to top functionality
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Highlight active navigation item
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.sidebar a[href^="#"]');
+
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= (sectionTop - 200)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Add some interactive effects
+    document.addEventListener('DOMContentLoaded', function () {
+      // Add hover effects to cards
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', function () {
+          this.style.transform = 'translateY(-2px)';
+          this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.15)';
+          this.style.transition = 'all 0.3s ease';
+        });
+
+        card.addEventListener('mouseleave', function () {
+          this.style.transform = 'translateY(0)';
+          this.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+        });
+      });
+
+      // Add click animation to code blocks
+      const codeBlocks = document.querySelectorAll('pre');
+      codeBlocks.forEach(block => {
+        block.addEventListener('click', function () {
+          // Copy to clipboard functionality
+          navigator.clipboard.writeText(this.textContent).then(() => {
+            // Show feedback
+            const originalBg = this.style.backgroundColor;
+            this.style.backgroundColor = '#d4edda';
+            this.style.transition = 'background-color 0.3s ease';
+
+            setTimeout(() => {
+              this.style.backgroundColor = originalBg;
+            }, 1000);
+          });
+        });
+
+        // Add tooltip
+        block.title = 'คลิกเพื่อคัดลอกโค้ด';
+        block.style.cursor = 'pointer';
+      });
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        closeMobileMenu();
+      }
+    });
+  </script>
+
+</body>
+
+</html>

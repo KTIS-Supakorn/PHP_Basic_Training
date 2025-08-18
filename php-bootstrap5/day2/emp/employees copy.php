@@ -1,0 +1,156 @@
+<?php
+require 'cnn_db.php';
+?>
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="utf-8">
+    <title>ข้อมูลพนักงาน</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+
+<body>
+    <?php include_once('nav.php'); ?>
+
+    <div class="container" style="padding-top:70px">
+        <h2 class="mb-3"><i class="bi bi-people"></i> ข้อมูลพนักงาน</h2>
+
+        <!-- ฟอร์มเพิ่มข้อมูล -->
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                เพิ่มข้อมูลพนักงาน
+            </div>
+            <div class="card-body">
+                <form action="insert_employee.php" method="post" class="row g-3">
+                    <!-- รหัสพนักงาน -->
+                    <div class="col-md-3">
+                        <label class="form-label">รหัสพนักงาน</label>
+                        <input type="text" name="emp_code" class="form-control" required>
+                    </div>
+                    <!-- ชื่อ-นามสกุล -->
+                    <div class="col-md-5">
+                        <label class="form-label">ชื่อ-นามสกุล</label>
+                        <input type="text" name="fullname_th" class="form-control" required>
+                    </div>
+                    <!-- อีเมล -->
+                    <div class="col-md-4">
+                        <label class="form-label">อีเมล</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+
+                    <div class="row mb-3">
+                        <!-- เบอร์โทร -->
+                        <div class="col-md-4">
+                            <label class="form-label">เบอร์โทร</label>
+                            <input type="text" name="phone" class="form-control">
+                        </div>
+                        <!-- ฝ่าย -->
+                        <div class="col-md-4">
+                            <label class="form-label">ฝ่าย</label>
+                            <select name="dept_id" class="form-select" required>
+                                <option value="">-- เลือกฝ่าย --</option>
+                                <?php
+                                $dept_sql = "SELECT id, name_th, short_name FROM departments ORDER BY id";
+                                $dept_rs  = mysqli_query($conn, $dept_sql);
+                                if ($dept_rs && mysqli_num_rows($dept_rs) > 0):
+                                    while ($dep = mysqli_fetch_assoc($dept_rs)):
+                                ?>
+                                        <option value="<?= $dep['id'] ?>">
+                                            <?= $dep['id'] . ": " . $dep['name_th'] . " " . $dep['short_name'] ?>
+                                        </option>
+                                <?php
+                                    endwhile;
+                                endif;
+                                ?>
+                            </select>
+                        </div>
+                        <!-- เงินเดือน -->
+                        <div class="col-md-2">
+                            <label class="form-label">เงินเดือน</label>
+                            <input type="number" name="salary" class="form-control" step="0.01" min="0">
+                        </div>
+                        <!-- วันที่เริ่มงาน -->
+                        <div class="col-md-2 mb-3">
+                            <label class="form-label">วันที่เริ่มงาน</label>
+                            <input type="date" name="hired_at" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-outline-primary">✅ บันทึก</button>
+                        <button type="reset" class="btn btn-outline-danger">❌ ยกเลิก</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <br>
+        <div class="table-responsive">
+            <table class="table table-dark table-hover table-striped table-bordered align-middle">
+                <thead>
+                    <tr>
+                        <th>ไอดี</th>
+                        <th>รหัสพนักงาน</th>
+                        <th>ชื่อพนักงาน</th>
+                        <th>email</th>
+                        <th>เบอร์โทร</th>
+                        <th>รหัสฝ่าย</th>
+                        <th>เงินเดือน</th>
+                        <th>วันที่เริ่มงาน</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // $sql = "SELECT * FROM employees";
+                    $sql = "SELECT employees.*, 
+                    departments.name_th AS dept_name
+                    FROM employees
+                    LEFT JOIN departments  ON departments.id = employees.dept_id
+                    ORDER BY employees.id DESC";
+                    $result = mysqli_query($conn, $sql);
+                    if ($result && mysqli_num_rows($result) > 0):
+                        while ($row = mysqli_fetch_assoc($result)):
+                            $hired = $row['hired_at'] ? date('d-m-Y', strtotime($row['hired_at'])) : '';
+                    ?>
+                            <tr style="white-space: nowrap;">
+                                <td><?= $row['id'] ?></td>
+                                <td><?= $row['emp_code'] ?></td>
+                                <td><?= $row['fullname_th'] ?></td>
+                                <td><?= $row['email'] ?></td>
+                                <td><?= $row['phone'] ?></td>
+                                <td><?= $row['dept_id'] ?>: <?= $row['dept_name'] ?></td>
+                                <td class="text-end"><?= number_format($row['salary'], 2) ?></td>
+                                <td><?= $hired ?></td>
+                                <td class="text-nowrap">
+                                    <!-- แก้ไข -->
+                                    <a href="edit_employee.php?id_edit=<?= $row['id'] ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                    <!-- ปุ่มลบ -->
+                                    <a href="delete_employee.php?id_delete=<?= $row['id'] ?>"
+                                        class="btn btn-sm btn-danger"
+                                        onclick="return confirm('ยืนยันลบข้อมูล รหัสพนักงาน <?= $row['emp_code'] . " " . $row['fullname_th'] ?> ?')">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php
+                        endwhile;
+                    else:
+                        ?>
+                        <tr>
+                            <td colspan="9" class="text-center py-4">ยังไม่มีข้อมูล</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
